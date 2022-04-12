@@ -1,0 +1,46 @@
+---
+- name: Get latest NGINX source
+  block:
+    - name: Try fresh install of ModSec
+      shell:
+        chdir: /usr/src
+        cmd: git clone -b nginx_refactoring https://github.com/SpiderLabs/ModSecurity.git
+    - name: Initialized any submodules
+      shell:
+        chdir: /usr/src/ModSecurity
+        cmd: git submodule init
+  rescue:
+    - name: Assume pre-existing folder
+      shell:
+        chdir: /usr/src/ModSecurity
+        cmd: |
+          git reset --hard
+          git pull
+  always:
+    - name: Update submodules
+      shell:
+        chdir: /usr/src/ModSecurity
+        cmd: git submodule update
+- name: Build Mod Security
+  shell:
+    cmd: |
+      ./autogen.sh
+      ./configure --enable-standalone-module --disable-mlogc
+    chdir: /usr/src/ModSecurity
+  args:
+    executable: /bin/bash
+- name: Compile Mod Security
+  shell:
+    chdir: /usr/src/ModSecurity
+    cmd: |
+      make
+      make install
+- name: Get Security Headers
+  git:
+    repo: https://github.com/GetPageSpeed/ngx_security_headers.git
+    dest: /usr/src/ModSecHeaders
+
+
+
+
+

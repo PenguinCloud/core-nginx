@@ -1,0 +1,6 @@
+---
+- name: get rtmp module
+  git:
+    dest: /usr/src/ModRTMP
+    repo: https://github.com/arut/nginx-rtmp-module.git
+    accept_hostkey: yes

@@ -1,0 +1,35 @@
+---
+- name: Install libraries needed for Let's Encrypt
+  apt:
+    pkg:
+      - certbot
+      - python3-certbot
+    state: latest
+- name: Update config with your information
+  lineinfile:
+    regex: " {{ item.field }}"
+    line: "{{ item.line }}"
+    path: "{{ playbook_dir }}/configs/ssl/certbot.j2"
+  loop:
+    - { field: "email", line: "email = {{ ssl.email}}" }
+    - { field: "domains", line: "domains = *.{{ ssl.tld}},{{ ssl.tld}}"}
+- name: Run Certbot
+  expect:
+    chdir: /usr/src/nginx
+    command: "certbot certonly --config {{ playbook_dir }}/configs/ssl/certbot.j2"
+    responses:
+      (?i)Are you OK with your IP being logged: "Yes"
+  register: dnsinstructions
+  ignore_errors: yes
+- name: Add to your DNS the mentioned TXT record
+  debug:
+    var: dnsinstructions
+- pause:
+    prompt: "Hit enter once ready"
+- name: Wait for DNS propogation
+  pause:
+    minutes: 2
+- name: Run Certbot again
+  shell:
+    chdir: /usr/src/nginx
+    cmd: "certbot certonly --config {{ playbook_dir }}/configs/ssl/certbot.j2"

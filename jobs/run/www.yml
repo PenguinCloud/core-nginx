@@ -1,0 +1,36 @@
+---
+- name: Adding www configs
+  include_vars:
+    dir: "{{ playbook_dir }}/vars/"
+    extensions:
+      - 'yml'
+- name: Create config file
+  blockinfile:
+    path: "/etc/ptg/www/sites/{{ item.value }}"
+    create: yes
+    backup: yes
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    block: |
+      include /etc/nginx/upstreams/*.conf
+      server {
+        server_name {{ item.value.fqdn }};
+        location / {
+          proxy_pass {{ item.values.upstream }};
+          proxy_ssl_verify {{ item.value.ssl.verify }};
+        }
+        listen 443;
+        include /etc/ptg/ssl/cert.conf # managed by ptg
+        include /etc/ptg/www/options-ssl-nginx.conf; # managed by Certbot
+        include /etc/ptg/www/proxy.conf # managed by ptg
+        ssl_dhparam /etc/ptg/www/ssl-dhparams.pem; # managed by Certbot
+      }
+  loop: www
+- name: Add loadbalancer method if set
+  lineinfile:
+    path: "/etc/ptg/www/sites/{{ item.value }}"
+    create: yes
+    insertafter: 'application'
+    line: 'push {{ item.value.destinations.value.url}}/{{ item.value.destinations.value.key}};'
+  loop: www

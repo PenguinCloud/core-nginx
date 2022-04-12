@@ -1,0 +1,36 @@
+---
+- name: remove nginx
+  apt:
+    name: nginx
+    state: absent
+    purge: yes
+    autoremove: yes
+- name: install neccessary packages
+  apt:
+    update_cache: yes
+    name:
+      - apache2-dev
+      - apt-utils
+      - autoconf
+      - automake
+      - build-essential
+      - checkinstall
+      - ffmpeg
+      - git
+      - libcurl4-openssl-dev
+      - libgeoip-dev
+      - liblmdb-dev
+      - libluajit-5.1-2
+      - libpcre++-dev
+      - libpcre3
+      - libpcre3-dev
+      - libssl-dev
+      - libtool
+      - libxml2-dev
+      - libyajl-dev
+      - net-tools
+      - pkgconf
+      - uthash-dev
+      - wget
+      - zlib1g-dev
+    state: present

@@ -1,0 +1,24 @@
+- name: Include Initialize
+  include_tasks:
+    file: initialize.yml
+    apply:
+      tags:
+        - build
+- name: Get RTMP
+  include_tasks:
+    file: rtmp.yml
+    apply:
+      tags:
+        - build
+- name: Include Security Mods
+  include_tasks:
+    file: security-mods.yml
+    apply:
+      tags:
+        - build
+- name: Include nginx
+  include_tasks:
+    file: nginx.yml
+    apply:
+      tags:
+        - build
