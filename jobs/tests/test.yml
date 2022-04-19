@@ -1,0 +1,4 @@
+---
+- name: Test nginx
+  include_tasks:
+    file: jobs/tests/nginx_test.yml

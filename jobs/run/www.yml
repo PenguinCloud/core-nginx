@@ -4,6 +4,7 @@
     dir: "{{ playbook_dir }}/vars/"
     extensions:
       - 'yml'
+
 - name: Create config file
   blockinfile:
     path: "/etc/ptg/www/sites/{{ item.value }}"
@@ -27,6 +28,7 @@
         ssl_dhparam /etc/ptg/www/ssl-dhparams.pem; # managed by Certbot
       }
   loop: www
+
 - name: Add loadbalancer method if set
   lineinfile:
     path: "/etc/ptg/www/sites/{{ item.value }}"

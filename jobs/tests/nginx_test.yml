@@ -1,0 +1,6 @@
+---
+- name: Test for running nginx
+  shell: ps waux | grep nginx
+  register: nginx_result
+  failed_when: nginx_result.stdout_lines | length == 1
+

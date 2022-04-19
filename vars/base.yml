@@ -1,75 +1,75 @@
 ---
 nginx:
-  url:   "'{{ lookup('env', 'NGINX_URL') }}'" # example.com
-  gzip:  "'{{ lookup('env', 'NGINX_GZIP') }}'" # on
-  domain: "'{{ lookup('env', 'NGINX_DOMAIN'') }}'" # example.com
+  url: "{{ lookup('env', 'NGINX_URL') }}" # example.com
+  gzip: "{{ lookup('env', 'NGINX_GZIP') }}" # on
+  domain: "{{ lookup('env', 'NGINX_DOMAIN') }}" # example.com
 rtmp:
-  enable:  "'{{ lookup('env', 'RTMP_ENABLE'') }}'" # no
-  hls: "'{{ lookup('env', 'RTMP_HLS'') }}'" # on
-  record: "'{{ lookup('env', 'RTMP_RECORD') }}'" # on
-  port: "'{{ lookup('env', 'RTMP_PORT') }}'" # 1935
-  user: "'{{ lookup('env', 'RTMP_USER') }}'" # user
-  pass: "'{{ lookup('env', 'RTMP_PASS') }}'" # 123456
+  enable:  "{{ lookup('env', 'RTMP_ENABLE') }}" # no
+  hls: "{{ lookup('env', 'RTMP_HLS') }}" # on
+  record: "{{ lookup('env', 'RTMP_RECORD') }}" # on
+  port: "{{ lookup('env', 'RTMP_PORT') }}" # 1935
+  user: "{{ lookup('env', 'RTMP_USER') }}" # user
+  pass: "{{ lookup('env', 'RTMP_PASS') }}" # 123456
   destination:
-    url: "'{{ lookup('env', 'RTMP_DEST_URL') }}'" # rtmp.penguintech.group
-    key: "'{{ lookup('env', 'RTMP_DEST_KEY') }}'" # notakey
+    url: "{{ lookup('env', 'RTMP_DEST_URL') }}" # rtmp.penguintech.group
+    key: "{{ lookup('env', 'RTMP_DEST_KEY') }}" # notakey
 stream:
-  enable: "'{{ lookup('env', 'STREAM_ENABLE'') }}'" # no
-  port: "'{{ lookup('env', 'STREAM_PORT') }}'" # 2525
-  protocol: "'{{ lookup('env', 'STREAM_PROTO') }}'" # tcp
-  buffer: "'{{ lookup('env', 'STREAM_BUFFER') }}'" # 16k
+  enable: "{{ lookup('env', 'STREAM_ENABLE') }}" # no
+  port: "{{ lookup('env', 'STREAM_PORT') }}" # 2525
+  protocol: "{{ lookup('env', 'STREAM_PROTO') }}" # tcp
+  buffer: "{{ lookup('env', 'STREAM_BUFFER') }}" # 16k
 http:
-  enable:  "'{{ lookup('env', 'HTTP_ENABLE'') }}'" # yes
-  port: "'{{ lookup('env', 'HTTP_PORT') }}'" # 80
-  root: "'{{ lookup('env', 'HTTP_ROOT') }}'" # /var/www/public_html
+  enable:  "{{ lookup('env', 'HTTP_ENABLE') }}" # yes
+  port: "{{ lookup('env', 'HTTP_PORT') }}" # 80
+  root: "{{ lookup('env', 'HTTP_ROOT') }}" # /var/www/public_html
   ssl:
-    enable: "'{{ lookup('env', 'HTTPS_ENABLE'') }}'" # no
-    redirect: "'{{ lookup('env', 'HTTPS_REDIRECT'') }}'" # yes
-    root: "'{{ lookup('env', 'HTTPS_ROOT') }}'" # /var/www/public_html
-    port: "'{{ lookup('env', 'HTTPS_PORT') }}'" # 443
-    keysize: "'{{ lookup('env', 'HTTPS_KEYSIZE'') }}'" # 4096
-    email: "'{{ lookup('env', 'HTTPS_EMAIL') }}'" # na@example.com
-    method: "'{{ lookup('env', 'HTTPS_METHOD') }}'"  #  [LE], BYOC, or GEN
+    enable: "{{ lookup('env', 'HTTPS_ENABLE') }}" # no
+    redirect: "{{ lookup('env', 'HTTPS_REDIRECT') }}" # yes
+    root: "{{ lookup('env', 'HTTPS_ROOT') }}" # /var/www/public_html
+    port: "{{ lookup('env', 'HTTPS_PORT') }}" # 443
+    keysize: "{{ lookup('env', 'HTTPS_KEYSIZE') }}" # 4096
+    email: "{{ lookup('env', 'HTTPS_EMAIL') }}" # na@example.com
+    method: "{{ lookup('env', 'HTTPS_METHOD') }}"  #  [LE], BYOC, or GEN
 upstream:
-  enable:  "'{{ lookup('env', 'UPSTREAM_ENABLE'') }}'" # no
+  enable:  "'{{ lookup('env', 'UPSTREAM_ENABLE') }}'" # no
   lbMethod: "'{{ lookup('env', 'STREAM_LBMETHOD') }}'" # none
-  verify: "'{{ lookup('env', 'UPSTREAM_SSLVERIFY'') }}'" # yes
+  verify: "'{{ lookup('env', 'UPSTREAM_SSLVERIFY') }}'" # yes
   destination1:
-    enable: "'{{ lookup('env', 'STREAM_DEST1_ENABLE'') }}'" # yes
+    enable: "'{{ lookup('env', 'STREAM_DEST1_ENABLE') }}'" # yes
     ip: "'{{ lookup('env', 'STREAM_DEST1_IP') }}'" # 127.0.0.1
     port: "'{{ lookup('env', 'STREAM_DEST1_PORT') }}'" # 2525
     fails: "'{{ lookup('env', 'STREAM_DEST1_FAILS') }}'" # 5
     timeout: "'{{ lookup('env', 'STREAM_DEST1_TIMEOUT') }}'" # 5
     keepalive: "'{{ lookup('env', 'STREAM_DEST1_KEEPALIVE') }}'" # 30
   destination2:
-    enable: "'{{ lookup('env', 'STREAM_DEST2_ENABLE'') }}'" # no
+    enable: "'{{ lookup('env', 'STREAM_DEST2_ENABLE') }}'" # no
     ip: "'{{ lookup('env', 'STREAM_DEST2_IP') }}'" # 127.0.0.1
     port: "'{{ lookup('env', 'STREAM_DEST2_PORT') }}'" # 2525
     fails: "'{{ lookup('env', 'STREAM_DEST2_FAILS') }}'" # 5
     timeout: "'{{ lookup('env', 'STREAM_DEST2_TIMEOUT') }}'" # 5
     keepalive: "'{{ lookup('env', 'STREAM_DEST2_KEEPALIVE') }}'" # 30
   destination3:
-    enable: "'{{ lookup('env', 'STREAM_DEST3_ENABLE'') }}'" # no
+    enable: "'{{ lookup('env', 'STREAM_DEST3_ENABLE') }}'" # no
     ip: "'{{ lookup('env', 'STREAM_DEST3_IP') }}'" # 127.0.0.1
     port: "'{{ lookup('env', 'STREAM_DEST3_PORT') }}'" # 2525
     fails: "'{{ lookup('env', 'STREAM_DEST3_FAILS') }}'" # 5
     timeout: "'{{ lookup('env', 'STREAM_DEST3_TIMEOUT') }}'" # 5
     keepalive: "'{{ lookup('env', 'STREAM_DEST3_KEEPALIVE') }}'" # 30
   destination4:
-    enable: "'{{ lookup('env', 'STREAM_DEST4_ENABLE'') }}'" # no
+    enable: "'{{ lookup('env', 'STREAM_DEST4_ENABLE') }}'" # no
     ip: "'{{ lookup('env', 'STREAM_DEST4_IP') }}'" # 127.0.0.1
     port: "'{{ lookup('env', 'STREAM_DEST4_PORT') }}'" # 2525
     fails: "'{{ lookup('env', 'STREAM_DEST4_FAILS') }}'" # 5
     timeout: "'{{ lookup('env', 'STREAM_DEST4_TIMEOUT') }}'" # 5
     keepalive: "'{{ lookup('env', 'STREAM_DEST4_KEEPALIVE') }}'" # 30
   destination5:
-    enable: "'{{ lookup('env', 'STREAM_DEST5_ENABLE'') }}'" # no
+    enable: "'{{ lookup('env', 'STREAM_DEST5_ENABLE') }}'" # no
     ip: "'{{ lookup('env', 'STREAM_DEST5_IP') }}'" # 127.0.0.1
     port: "'{{ lookup('env', 'STREAM_DEST5_PORT') }}'" # 2525
     fails: "'{{ lookup('env', 'STREAM_DEST5_FAILS') }}'" # 5
     timeout: "'{{ lookup('env', 'STREAM_DEST5_TIMEOUT') }}'" # 5
     keepalive: "'{{ lookup('env', 'STREAM_DEST5_KEEPALIVE') }}'" # 30
 fpm:
-  enable: "'{{ lookup('env', 'FPM_ENABLE'') }}'" # no
-  socket: "'{{ lookup('env', 'FPM_SOCKET'') }}'" # yes
-  port: "'{{ lookup('env', 'FPM_PORT'') }}'" # 9000
+  enable: "'{{ lookup('env', 'FPM_ENABLE') }}'" # no
+  socket: "'{{ lookup('env', 'FPM_SOCKET') }}'" # yes
+  port: "'{{ lookup('env', 'FPM_PORT') }}'" # 9000

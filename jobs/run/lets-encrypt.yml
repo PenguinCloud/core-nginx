@@ -5,6 +5,7 @@
       - certbot
       - python3-certbot
     state: latest
+
 - name: Update config with your information
   lineinfile:
     regex: " {{ item.field }}"
@@ -13,6 +14,7 @@
   loop:
     - { field: "email", line: "email = {{ ssl.email}}" }
     - { field: "domains", line: "domains = *.{{ ssl.tld}},{{ ssl.tld}}"}
+
 - name: Run Certbot
   expect:
     chdir: /usr/src/nginx
@@ -21,6 +23,7 @@
       (?i)Are you OK with your IP being logged: "Yes"
   register: dnsinstructions
   ignore_errors: yes
+
 - name: Add to your DNS the mentioned TXT record
   debug:
     var: dnsinstructions

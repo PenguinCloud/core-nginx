@@ -1,9 +1,8 @@
 FROM penguintech/core-ansible
 MAINTAINER Penguin Technologies Group
-COPY . /opt/nginx
-RUN apt-get update && apt-get install -y
+COPY . /opt/nginx/
 # URL of source code for nginx
-ARG NGINX_URL="http://nginx.org/download/nginx-1.18.0.tar.gz"
+ARG NGINX_URL="http://nginx.org/download/nginx-1.20.2.tar.gz"
 # on / off
 ARG NGINX_GZIP="on"
 ENV NGINX_DOMAIN="default.penguintech.group"
@@ -22,5 +21,7 @@ ENV RTMP_PASS="123456"
 ENV RTMP_DEST_URL="rtmp.penguintech.group"
 # Recommend alphanumeric
 ENV RTMP_DEST_KEY="notAkey"
-RUN ln -sf /dev/stdout /var/log/access.log && ln -sf /dev/stderr /var/log/error.log
 WORKDIR "/opt/nginx"
+RUN ansible-playbook /opt/nginx/upstart.yml -c local --tags build
+RUN ln -sf /dev/stdout /var/log/access.log && ln -sf /dev/stderr /var/log/error.log
+ENTRYPOINT ["ansible-playbook", "/opt/nginx/upstart.yml", "-c", "local", "--tags", "run,exec"]

@@ -4,10 +4,12 @@
     src: "{{ nginx.url }}"
     dest: /usr/src
     remote_src: yes
+
 - name: Change name to NGINX
   shell:
     chdir: /usr/src
-    cmd: rm -rf nginx && mv nginx-1.18.0/ nginx/
+    cmd: rm -rf nginx && mv nginx-1.20.2/ nginx/
+
 - name: Configure NGINX for compiling
   shell:
     chdir: /usr/src/nginx/
@@ -16,6 +18,7 @@
         --with-http_ssl_module --with-stream  --with-http_geoip_module \
         --with-http_v2_module --with-threads --with-http_gunzip_module --with-compat \
         --user=www-data --group=www-data
+
 - name: Compile PMG NGINX
   shell:
     chdir: /usr/src/nginx
@@ -23,13 +26,16 @@
       make
       make install -j 8
   register: compileout
+
 #- name: Output compile results # Debug for when compile is having issues
 #  debug:
 #    var: compileout
+
 - name: create nginx user
   ansible.builtin.user:
     name: www-data
     group: www-data
+
 - name: Create a symbolic link to etc
   ansible.builtin.file:
     src: /usr/local/nginx/conf
@@ -37,6 +43,7 @@
     owner: www-data
     group: www-data
     state: link
+
 - name: Create a symbolic link to nginx binary
   ansible.builtin.file:
     src: /usr/local/nginx/sbin/nginx
@@ -44,6 +51,7 @@
     owner: www-data
     group: www-data
     state: link
+
 - name: Install nginx config
   copy:
     src: "{{ playbook_dir }}/data/nginx.j2"
