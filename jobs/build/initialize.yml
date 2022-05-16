@@ -1,13 +1,6 @@
 ---
-- name: remove nginx
-  apt:
-    name: nginx
-    state: absent
-    purge: yes
-    autoremove: yes
 - name: install neccessary packages
   apt:
-    update_cache: yes
     name:
       - apache2-dev
       - apt-utils
@@ -19,6 +12,7 @@
       - git
       - libcurl4-openssl-dev
       - libgeoip-dev
+      - libgd-dev
       - liblmdb-dev
       - libluajit-5.1-2
       - libpcre++-dev
@@ -31,6 +25,9 @@
       - net-tools
       - pkgconf
       - uthash-dev
+      - uuid-dev
       - wget
+      - zlib1g
       - zlib1g-dev
     state: present
+    update_cache: yes

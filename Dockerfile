@@ -3,8 +3,10 @@ MAINTAINER Penguin Technologies Group
 COPY . /opt/nginx/
 # URL of source code for nginx
 ARG NGINX_URL="http://nginx.org/download/nginx-1.20.2.tar.gz"
+ARG NGINX_VERSION="1.20.2"
 # on / off
 ARG NGINX_GZIP="on"
+ARG FPM_ENABLE="yes"
 ENV NGINX_DOMAIN="default.penguintech.group"
 # tuple of 2
 ENV CERT_KEYSIZE="4096"

@@ -5,7 +5,7 @@
     extensions:
       - 'yml'
 
-- name: Create config file
+- name: Create config file     ## Template local http proxy http stream  rtmp
   blockinfile:
     path: "/etc/ptg/www/sites/{{ item.value }}"
     create: yes
@@ -36,3 +36,4 @@
     insertafter: 'application'
     line: 'push {{ item.value.destinations.value.url}}/{{ item.value.destinations.value.key}};'
   loop: www
+
