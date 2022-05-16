@@ -1,12 +1,19 @@
 FROM penguintech/core-ansible
-MAINTAINER Penguin Technologies Group
-COPY . /opt/nginx/
+LABEL maintainer="Penguinz Tech Group LLC"
+LABEL org.opencontainers.image.authors="info@penguintech.group"
+COPY . /opt/manager/
+WORKDIR /opt/manager
+RUN apt update && apt dist-upgrade -y && apt auto-remove -y && apt clean -y
 # URL of source code for nginx
 ARG NGINX_URL="http://nginx.org/download/nginx-1.20.2.tar.gz"
 ARG NGINX_VERSION="1.20.2"
 # on / off
 ARG NGINX_GZIP="on"
 ARG FPM_ENABLE="yes"
+RUN ansible-playbook upstart.yml --tags build -c local
+# PUT YER ENVS in here
+RUN ansible-playbook upstart.yml --tags run -c local
+ENTRYPOINT ["/bin/bash","/opt/manager/entrypoint.sh"]
 ENV NGINX_DOMAIN="default.penguintech.group"
 # tuple of 2
 ENV CERT_KEYSIZE="4096"
@@ -23,7 +30,5 @@ ENV RTMP_PASS="123456"
 ENV RTMP_DEST_URL="rtmp.penguintech.group"
 # Recommend alphanumeric
 ENV RTMP_DEST_KEY="notAkey"
-WORKDIR "/opt/nginx"
-RUN ansible-playbook /opt/nginx/upstart.yml -c local --tags build
-RUN ln -sf /dev/stdout /var/log/access.log && ln -sf /dev/stderr /var/log/error.log
-ENTRYPOINT ["ansible-playbook", "/opt/nginx/upstart.yml", "-c", "local", "--tags", "run,exec"]
+RUN ansible-playbook upstart.yml --tags run -c local
+ENTRYPOINT ["/bin/bash","/opt/manager/entrypoint.sh"]
