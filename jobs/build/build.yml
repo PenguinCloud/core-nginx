@@ -17,5 +17,5 @@
 - name: Install php-fpm
   include_tasks:
     file: php-fpm.yml
-  when: php-fpm.enabled == "yes"
+  when: fpm.enabled == "yes"
 
