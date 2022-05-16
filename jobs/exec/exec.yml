@@ -1,5 +1,4 @@
 ---
-- name: Execute nginx
-  shell: |
-     pkill -9 nginx
-     nginx -g 'daemon off;'
+- name: Start nginx
+  shell:
+    cmd: nginx
