@@ -1,8 +1,0 @@
-#---
-#- name: Test nginx
-#  include_tasks:
-#    file: jobs/tests/nginx_test.yml
-#
-#- name: Ports test
-#  include_tasks:
-#    file: jobs/tests/ports_test.yml

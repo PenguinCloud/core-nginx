@@ -35,14 +35,14 @@
         - run
     - name: Run tests to make sure build and run applied application correctly
       include_tasks:
-        file: jobs/tests/test.yml
+        file: jobs/tests/tests.yml
         apply:
           tags:
             - run
-            - test
+#            - test
       tags:
         - run
-        - test
+#        - test
     - name: Execute application
       include_tasks:
         file: jobs/exec/exec.yml
@@ -51,10 +51,9 @@
             - exec
       tags:
         - exec
-#    This section is not needed because we enable nginx daemon
-#    - name: Run tests to make sure app is running as expected
-#      include_tasks:
-#        file: jobs/run/test.yml
-#      tags:
-#        - exec
-#        - test
+    - name: Run tests to make sure app is running as expected
+      include_tasks:
+        file: jobs/tests/tests.yml
+      tags:
+        - exec
+        - test

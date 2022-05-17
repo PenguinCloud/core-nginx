@@ -3,15 +3,17 @@ version: "2.4"
 services:
   nginx-server:
     build: .
+    ports:
+      - "180:80"
+      - "1443:443"
     networks:
       - nginx
-
     healthcheck:
       test: ["CMD", "ansible-playbook", "upstart.yml", "--tag", "test"]
       interval: 5m
       timeout: 10s
-      retries: 3
-      start_period: 10s
+      retries: 5
+      start_period: 5s
 
 networks:
   nginx:

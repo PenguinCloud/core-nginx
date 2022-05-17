@@ -15,7 +15,7 @@
     file: nginx.yml
 
 - name: Install php-fpm
+  when: fpm.enable == "yes"
   include_tasks:
     file: php-fpm.yml
-  when: fpm.enabled == "yes"
 

@@ -4,8 +4,8 @@ LABEL org.opencontainers.image.authors="info@penguintech.group"
 COPY . /opt/manager/
 WORKDIR /opt/manager
 RUN apt update && apt dist-upgrade -y && apt auto-remove -y && apt clean -y
-# URL of source code for nginx
-ARG NGINX_URL="http://nginx.org/download/nginx-1.20.2.tar.gz"
+# URL of source code fornginx
+ARG NGINX_URL="https://nginx.org/download/nginx-1.20.2.tar.gz"
 ARG NGINX_VERSION="1.20.2"
 # on / off
 ARG NGINX_GZIP="on"
