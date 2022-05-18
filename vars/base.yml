@@ -33,48 +33,48 @@ http:
     email: "{{ lookup('env', 'HTTPS_EMAIL') }}" # na@example.com
     method: "{{ lookup('env', 'HTTPS_METHOD') }}"  #  [LE], BYOC, or GEN
 upstream:
-  enable:  "'{{ lookup('env', 'UPSTREAM_ENABLE') }}'" # no
-  lbMethod: "'{{ lookup('env', 'STREAM_LBMETHOD') }}'" # none
-  verify: "'{{ lookup('env', 'UPSTREAM_SSLVERIFY') }}'" # yes
+  enable:  "{{ lookup('env', 'UPSTREAM_ENABLE') }}" # no
+  lbMethod: "{{ lookup('env', 'STREAM_LBMETHOD') }}" # none
+  verify: "{{ lookup('env', 'UPSTREAM_SSLVERIFY') }}" # yes
   destination1:
-    enable: "'{{ lookup('env', 'STREAM_DEST1_ENABLE') }}'" # yes
-    ip: "'{{ lookup('env', 'STREAM_DEST1_IP') }}'" # 127.0.0.1
-    port: "'{{ lookup('env', 'STREAM_DEST1_PORT') }}'" # 2525
-    fails: "'{{ lookup('env', 'STREAM_DEST1_FAILS') }}'" # 5
-    timeout: "'{{ lookup('env', 'STREAM_DEST1_TIMEOUT') }}'" # 5
-    keepalive: "'{{ lookup('env', 'STREAM_DEST1_KEEPALIVE') }}'" # 30
+    enable: "{{ lookup('env', 'STREAM_DEST1_ENABLE') }}" # yes
+    ip: "{{ lookup('env', 'STREAM_DEST1_IP') }}" # 127.0.0.1
+    port: "{{ lookup('env', 'STREAM_DEST1_PORT') }}" # 2525
+    fails: "'{{ lookup('env', 'STREAM_DEST1_FAILS') }}" # 5
+    timeout: "{{ lookup('env', 'STREAM_DEST1_TIMEOUT') }}" # 5
+    keepalive: "{{ lookup('env', 'STREAM_DEST1_KEEPALIVE') }}" # 30
   destination2:
-    enable: "'{{ lookup('env', 'STREAM_DEST2_ENABLE') }}'" # no
-    ip: "'{{ lookup('env', 'STREAM_DEST2_IP') }}'" # 127.0.0.1
-    port: "'{{ lookup('env', 'STREAM_DEST2_PORT') }}'" # 2525
-    fails: "'{{ lookup('env', 'STREAM_DEST2_FAILS') }}'" # 5
-    timeout: "'{{ lookup('env', 'STREAM_DEST2_TIMEOUT') }}'" # 5
-    keepalive: "'{{ lookup('env', 'STREAM_DEST2_KEEPALIVE') }}'" # 30
+    enable: "{{ lookup('env', 'STREAM_DEST2_ENABLE') }}" # no
+    ip: "{{ lookup('env', 'STREAM_DEST2_IP') }}" # 127.0.0.1
+    port: "{{ lookup('env', 'STREAM_DEST2_PORT') }}" # 2525
+    fails: "{{ lookup('env', 'STREAM_DEST2_FAILS') }}" # 5
+    timeout: "{{ lookup('env', 'STREAM_DEST2_TIMEOUT') }}" # 5
+    keepalive: "{{ lookup('env', 'STREAM_DEST2_KEEPALIVE') }}" # 30
   destination3:
-    enable: "'{{ lookup('env', 'STREAM_DEST3_ENABLE') }}'" # no
-    ip: "'{{ lookup('env', 'STREAM_DEST3_IP') }}'" # 127.0.0.1
-    port: "'{{ lookup('env', 'STREAM_DEST3_PORT') }}'" # 2525
-    fails: "'{{ lookup('env', 'STREAM_DEST3_FAILS') }}'" # 5
-    timeout: "'{{ lookup('env', 'STREAM_DEST3_TIMEOUT') }}'" # 5
-    keepalive: "'{{ lookup('env', 'STREAM_DEST3_KEEPALIVE') }}'" # 30
+    enable: "{{ lookup('env', 'STREAM_DEST3_ENABLE') }}" # no
+    ip: "{{ lookup('env', 'STREAM_DEST3_IP') }}" # 127.0.0.1
+    port: "{{ lookup('env', 'STREAM_DEST3_PORT') }}" # 2525
+    fails: "{{ lookup('env', 'STREAM_DEST3_FAILS') }}" # 5
+    timeout: "{{ lookup('env', 'STREAM_DEST3_TIMEOUT') }}" # 5
+    keepalive: "{{ lookup('env', 'STREAM_DEST3_KEEPALIVE') }}" # 30
   destination4:
-    enable: "'{{ lookup('env', 'STREAM_DEST4_ENABLE') }}'" # no
-    ip: "'{{ lookup('env', 'STREAM_DEST4_IP') }}'" # 127.0.0.1
-    port: "'{{ lookup('env', 'STREAM_DEST4_PORT') }}'" # 2525
-    fails: "'{{ lookup('env', 'STREAM_DEST4_FAILS') }}'" # 5
-    timeout: "'{{ lookup('env', 'STREAM_DEST4_TIMEOUT') }}'" # 5
-    keepalive: "'{{ lookup('env', 'STREAM_DEST4_KEEPALIVE') }}'" # 30
+    enable: "{{ lookup('env', 'STREAM_DEST4_ENABLE') }}" # no
+    ip: "{{ lookup('env', 'STREAM_DEST4_IP') }}" # 127.0.0.1
+    port: "{{ lookup('env', 'STREAM_DEST4_PORT') }}" # 2525
+    fails: "{{ lookup('env', 'STREAM_DEST4_FAILS') }}" # 5
+    timeout: "{{ lookup('env', 'STREAM_DEST4_TIMEOUT') }}" # 5
+    keepalive: "{{ lookup('env', 'STREAM_DEST4_KEEPALIVE') }}" # 30
   destination5:
-    enable: "'{{ lookup('env', 'STREAM_DEST5_ENABLE') }}'" # no
-    ip: "'{{ lookup('env', 'STREAM_DEST5_IP') }}'" # 127.0.0.1
-    port: "'{{ lookup('env', 'STREAM_DEST5_PORT') }}'" # 2525
-    fails: "'{{ lookup('env', 'STREAM_DEST5_FAILS') }}'" # 5
-    timeout: "'{{ lookup('env', 'STREAM_DEST5_TIMEOUT') }}'" # 5
-    keepalive: "'{{ lookup('env', 'STREAM_DEST5_KEEPALIVE') }}'" # 30
+    enable: "{{ lookup('env', 'STREAM_DEST5_ENABLE') }}" # no
+    ip: "{{ lookup('env', 'STREAM_DEST5_IP') }}" # 127.0.0.1
+    port: "{{ lookup('env', 'STREAM_DEST5_PORT') }}" # 2525
+    fails: "{{ lookup('env', 'STREAM_DEST5_FAILS') }}" # 5
+    timeout: "{{ lookup('env', 'STREAM_DEST5_TIMEOUT') }}" # 5
+    keepalive: "{{ lookup('env', 'STREAM_DEST5_KEEPALIVE') }}" # 30
 fpm:
-  enable: "'{{ lookup('env', 'FPM_ENABLE') }}'" # no
-  socket: "'{{ lookup('env', 'FPM_SOCKET') }}'" # yes
-  port: "'{{ lookup('env', 'FPM_PORT') }}'" # 9000
+  enable: "{{ lookup('env', 'FPM_ENABLE') }}" # no
+  socket: "{{ lookup('env', 'FPM_SOCKET') }}" # yes
+  port: "{{ lookup('env', 'FPM_PORT') }}" # 9000
 ports:
   - 80
   - 443

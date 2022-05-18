@@ -5,7 +5,7 @@ services:
     build: .
     ports:
       - "180:80"
-      - "1443:443"
+      - "443:443"
     networks:
       - nginx
     healthcheck:

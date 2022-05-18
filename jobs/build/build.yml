@@ -1,3 +1,4 @@
+---
 - name: Include Initialize
   include_tasks:
     file: initialize.yml
@@ -15,7 +16,6 @@
     file: nginx.yml
 
 - name: Install php-fpm
-  when: fpm.enable == "yes"
   include_tasks:
     file: php-fpm.yml
-
+  when: fpm.enable == "yes"

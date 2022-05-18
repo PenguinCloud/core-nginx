@@ -1,4 +1,9 @@
 ---
+- name: Create empty directory sites enabled
+   file:
+    path: /etc/ptg/www/sites
+    state: directory
+
 - name: Adding www configs
   include_vars:
     dir: "{{ playbook_dir }}/vars/"
