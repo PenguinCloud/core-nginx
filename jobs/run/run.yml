@@ -1,7 +1,7 @@
-#---
-#- name: Run Let's encrypt
-#  include_tasks:
-#    file: jobs/run/lets-encrypt.yml
+---
+- name: Run Let's encrypt
+  include_tasks:
+    file: jobs/run/lets_encrypt.yml
 #
 #- name: Create Configs
 #  include_tasks:

@@ -1,7 +1,8 @@
 ---
 version: "2.4"
 services:
-  nginx-server:
+  app:
+    image: penguintech/nginx
     build: .
     ports:
       - "180:80"

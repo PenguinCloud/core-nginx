@@ -4,7 +4,7 @@
     - name: Try fresh install of ModSec
       shell:
         chdir: /usr/src
-        cmd: git clone -b nginx_refactoring https://github.com/SpiderLabs/ModSecurity.git
+        cmd: git clone -b nginx_refactoring "{{ modsec_link }}"
 
     - name: Initialized any submodules
       shell:
@@ -42,7 +42,7 @@
 
 - name: Get Security Headers
   git:
-    repo: https://github.com/GetPageSpeed/ngx_security_headers.git
+    repo: "{{ sec_headers_link }}"
     dest: /usr/src/ModSecHeaders
 
 

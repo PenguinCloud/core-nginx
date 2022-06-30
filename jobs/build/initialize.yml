@@ -29,5 +29,6 @@
       - wget
       - zlib1g
       - zlib1g-dev
+      - python-pexpect
     state: present
     update_cache: yes

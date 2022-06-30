@@ -2,7 +2,7 @@
 - name: Run Certbot
   expect:
     chdir: /usr/src/nginx
-    command: "certbot certonly --config {{ playbook_dir }}/configs/ssl/certbot.j2"
+    command: "certbot certonly --config {{ playbook_dir }}/templates/certbot.j2"
     responses:
       (?i)Are you OK with your IP being logged: "Yes"
   register: dnsinstructions
@@ -13,10 +13,21 @@
     var: dnsinstructions
 - pause:
     prompt: "Hit enter once ready"
+
 - name: Wait for DNS propogation
   pause:
     minutes: 2
+
 - name: Run Certbot again
   shell:
     chdir: /usr/src/nginx
-    cmd: "certbot certonly --config {{ playbook_dir }}/configs/ssl/certbot.j2"
+    cmd: "certbot certonly --config {{ playbook_dir }}/templates/certbot.j2"
+
+- name: install 'renew letsencrypt' cron
+  cron:
+    name: "certbot"
+    minute: 30
+    hour: 2
+    day: "*"
+    user: "root"
+    job: '/usr/bin/certbot renew --quiet --post-hook "nginx -s reload"'

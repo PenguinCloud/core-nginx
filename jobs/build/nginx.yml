@@ -38,10 +38,3 @@
   ansible.builtin.user:
     name: www-data
     group: www-data
-
-#- name: Install nginx config      ## What is this for
-#  copy:
-#    src: "{{ playbook_dir }}/data/nginx.j2"
-#    dest: "/etc/nginx/nginx.j2"
-#    force: yes
-#    remote_src: yes

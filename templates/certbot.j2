@@ -1,10 +1,11 @@
-rsa-key-size = 4096
+rsa-key-size = {{ http.ssl.keysize }}
 manual = true
-email = {{ admin.email }}
-webroot-path = /usr/share/nginx/html
+email = {{ http.ssl.email }}
+webroot-path = {{ http.ssl.root }}
 agree-tos = true
 quiet = true
-domains = {{ site.domain }}
+domains = {{ http.ssl.tld }}
 expand = true
 no-eff-email = true
 preferred-challenges = dns
+
