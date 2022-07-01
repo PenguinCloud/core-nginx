@@ -25,8 +25,7 @@
         --modules-path=/etc/nginx/modules --with-http_v2_module --with-stream=dynamic \
         --with-http_addition_module --with-http_mp4_module
 
-
-- name: Compile PMG NGINX
+- name: Compile NGINX
   shell:
     chdir: /opt/nginx
     cmd: |
@@ -34,7 +33,7 @@
       make install -j 8
   register: compileout
 
-- name: create nginx user
+- name: Create nginx user
   ansible.builtin.user:
     name: www-data
     group: www-data

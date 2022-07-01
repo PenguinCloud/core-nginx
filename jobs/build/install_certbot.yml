@@ -1,10 +1,7 @@
 ---
-- name: Add Certbot repo
-  apt_repository:
-    apt: "ppa:certbot/certbot
-    state: present
-
 - name: Install Certbot
   apt:
-    name: certbot
-    state: latest
+    name:
+      - certbot
+      - python3-certbot
+    state: present

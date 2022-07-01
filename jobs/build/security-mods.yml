@@ -5,7 +5,6 @@
       shell:
         chdir: /usr/src
         cmd: git clone -b nginx_refactoring "{{ modsec_link }}"
-
     - name: Initialized any submodules
       shell:
         chdir: /usr/src/ModSecurity
@@ -18,12 +17,10 @@
           git reset --hard
           git pull
   always:
-
     - name: Update submodules
       shell:
         chdir: /usr/src/ModSecurity
         cmd: git submodule update
-
 - name: Build Mod Security
   shell:
     cmd: |

@@ -1,8 +1,17 @@
 ---
+- name: Create empty repo for certbot config file
+  file:
+    path: /etc/certbot/
+    state: directory
+
+- name: Template a file
+  template:
+    src: templates/certbot.j2
+    dest: /etc/certbot/certbot.conf
+
 - name: Run Certbot
   expect:
-    chdir: /usr/src/nginx
-    command: "certbot certonly --config {{ playbook_dir }}/templates/certbot.j2"
+    command: certbot certonly --config /etc/certbot/certbot.conf
     responses:
       (?i)Are you OK with your IP being logged: "Yes"
   register: dnsinstructions
@@ -13,21 +22,18 @@
     var: dnsinstructions
 - pause:
     prompt: "Hit enter once ready"
-
 - name: Wait for DNS propogation
   pause:
     minutes: 2
-
 - name: Run Certbot again
   shell:
-    chdir: /usr/src/nginx
-    cmd: "certbot certonly --config {{ playbook_dir }}/templates/certbot.j2"
+    cmd: certbot certonly --config /etc/certbot/certbot.conf
 
-- name: install 'renew letsencrypt' cron
-  cron:
-    name: "certbot"
-    minute: 30
-    hour: 2
-    day: "*"
-    user: "root"
-    job: '/usr/bin/certbot renew --quiet --post-hook "nginx -s reload"'
+#- name: Install 'renew letsencrypt' cron
+#  cron:
+#    name: "certbot"
+#    minute: 30
+#    hour: 2
+#    day: "*"
+#    user: "root"
+#    job: '/usr/bin/certbot renew --quiet --post-hook "nginx -s reload"'

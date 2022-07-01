@@ -1,0 +1,29 @@
+---
+- name: Generate an OpenSSL private key
+  openssl_privatekey:
+    path: "/etc/ssl/private/{{ http_ssl.name }}.pem"
+    backup: yes
+
+- name: Set ssl.key variable if ssl.key == nokey
+  set_fact:
+    ssl_key: "/etc/ssl/private/{{ http_ssl.name }}.pem"
+
+- name: Generate an OpenSSL Certificate Signing Request with Subject information
+  openssl_csr:
+    path:  "/etc/ssl/certs/{{ http_ssl }}.crt"
+    privatekey_path: "{{ ssl_key }}"
+    country_name: "{{ http_ssl.country }}"
+    organization_name: "{{ http_ssl.name }}"
+    email_address: "{{ http_ssl.email }}"
+    common_name: "{{ http_ssl.tld }}"
+
+- name: Generate a Self Signed OpenSSL certificate
+  openssl_certificate:
+    path: "/etc/ssl/certs/{{ http_ssl.name }}.pem"
+    privatekey_path: "/etc/ssl/private/{{ http_ssl.name}}.pem"
+    csr_path: "/etc/ssl/certs/{{ http_ssl.name }}.crt"
+    provider: selfsigned
+
+- name: Set ssl.cert variable if ssl.cert == nocert
+  set_fact:
+    ssl_cert:  "/etc/ssl/certs/{{ http_ssl.name }}.pem"
