@@ -83,6 +83,8 @@ ENV UPSTREAM_DEST5_FAILS="5"
 ENV UPSTREAM_DEST5_TIMEOUT="5"
 ENV UPSTREAM_DEST5_KEEPALIVE="30"
 
+RUN ansible-playbook build.yml -c local
+
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 # Switch to non-root user
