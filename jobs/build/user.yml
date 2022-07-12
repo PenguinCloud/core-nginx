@@ -1,0 +1,27 @@
+- name: Copy Sudoers
+  copy:
+    src: "{{ playbook_dir }}/configs/sudoers"
+    dest: /etc/Sudoers
+    mode: "0555"
+    owner: root
+    group: root
+
+- name: Ensure group "admins" exists
+  ansible.builtin.group:
+    name: admins
+    state: present
+
+- name: Add the user 'james' with a bash shell, appending the group 'admins' and 'developers' to the user's groups
+  ansible.builtin.user:
+    name: "{{ run.user }}"
+    shell: /bin/bash
+    uid: 1337
+    groups: admins
+    append: yes
+
+- name: Give user ownership of app directory
+  file:
+    path: "/opt/{{ app.title }}"
+    owner: "{{ run.user }}"
+    group: "{{ run.user }}"
+    recurse: yes

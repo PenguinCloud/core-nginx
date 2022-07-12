@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: NGINX
+  hosts: localhost
   connection: local
   vars_files:
     - vars/base.yml
@@ -25,27 +26,9 @@
             - build
       tags:
         - build
-    - name: Run Configuration and Live
-      include_tasks:
-        file: jobs/run/run.yml
-        apply:
-          tags:
-            - run
-      tags:
-        - run
-#    - name: Run tests to make sure build and run applied application correctly
-#      include_tasks:
-#        file: jobs/tests/tests.yml
-#        apply:
-#          tags:
-#            - run
-#            - test
-#      tags:
-#        - run
-#        - test
     - name: Execute application
       include_tasks:
-        file: jobs/exec/exec.yml
+        file: jobs/run/exec.yml
         apply:
           tags:
             - exec
@@ -53,11 +36,7 @@
         - exec
     - name: Run tests to make sure app is running as expected
       include_tasks:
-        file: jobs/tests/tests.yml
-        apply:
-          tags:
-          - test
-          - exec
+        file: jobs/run/tests.yml
       tags:
         - exec
         - test

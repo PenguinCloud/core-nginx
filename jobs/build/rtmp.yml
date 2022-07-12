@@ -1,5 +1,5 @@
 ---
-- name: get rtmp module
+- name: Get rtmp module
   git:
     dest: /usr/src/ModRTMP
     repo: "{{ rtmp_link }}"

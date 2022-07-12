@@ -1,11 +1,9 @@
-rsa-key-size = {{ http_ssl.keysize }}
-manual = true
 email = {{ http_ssl.email }}
+manual = true
 webroot-path = {{ http_ssl.root }}
 agree-tos = true
-quiet = true
+manual-public-ip-logging-ok = true
+cert-name = {{ http_ssl.tld }}
 domains = {{ http_ssl.tld }}
-expand = true
 no-eff-email = true
 preferred-challenges = dns
-

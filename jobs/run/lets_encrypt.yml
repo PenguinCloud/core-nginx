@@ -22,18 +22,15 @@
     var: dnsinstructions
 - pause:
     prompt: "Hit enter once ready"
+
 - name: Wait for DNS propogation
   pause:
     minutes: 2
-- name: Run Certbot again
-  shell:
-    cmd: certbot certonly --config /etc/certbot/certbot.conf
 
-#- name: Install 'renew letsencrypt' cron
-#  cron:
-#    name: "certbot"
-#    minute: 30
-#    hour: 2
-#    day: "*"
-#    user: "root"
-#    job: '/usr/bin/certbot renew --quiet --post-hook "nginx -s reload"'
+- name: Run Certbot after adding DNS propogation
+  expect:
+    command: certbot certonly --config /etc/certbot/certbot.conf
+    responses:
+      (?i)Hit enter once ready: "enter"
+  ignore_errors: yes
+

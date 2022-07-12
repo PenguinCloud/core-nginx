@@ -30,5 +30,6 @@
       - zlib1g
       - zlib1g-dev
       - python3-pexpect
+      - python3-openssl
     state: present
     update_cache: yes

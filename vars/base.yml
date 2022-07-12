@@ -89,3 +89,8 @@ upstream:
 ports:
   - 80
   - 443
+
+run:
+  user: ptg-user
+app:
+  title: "{{ lookup('ansible.builtin.env', 'APP_TILE') }}"
