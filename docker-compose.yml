@@ -10,7 +10,7 @@ services:
     networks:
       - nginx
     healthcheck:
-      test: ["CMD", "ansible-playbook", "upstart.yml", "--tag", "test"]
+      test: ["CMD", "ansible-playbook", "entrypoint.yml", "--tag", "test"]
       interval: 5m
       timeout: 10s
       retries: 5
