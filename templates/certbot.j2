@@ -1,9 +1,7 @@
-email = {{ http_ssl.email }}
-manual = true
-webroot-path = {{ http_ssl.root }}
+nginx = true
 agree-tos = true
-manual-public-ip-logging-ok = true
-cert-name = {{ http_ssl.tld }}
-domains = {{ http_ssl.tld }}
-no-eff-email = true
-preferred-challenges = dns
+redirect = true
+hsts = true
+staple-ocsp = true
+domain = {{ http_ssl.tld }}
+email = {{ http_ssl.email }}
