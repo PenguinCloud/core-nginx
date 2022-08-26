@@ -1,4 +1,4 @@
-FROM code-dal1.penguintech.group:5050/ptg/standards/docker-ansible-image:stable
+FROM code-dal1.penguintech.group:5050/ptg/standards/docker-ansible-image:2.1.1beta
 LABEL company="Penguin Tech Group LLC"
 LABEL org.opencontainers.image.authors="info@penguintech.group"
 LABEL license="GNU AGPL3"
@@ -83,10 +83,12 @@ ENV UPSTREAM_DEST5_FAILS="5"
 ENV UPSTREAM_DEST5_TIMEOUT="5"
 ENV UPSTREAM_DEST5_KEEPALIVE="30"
 
+#RUN ansible-playbook entrypoint.yml --tags run -c local
+
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 # Switch to non-root user
-USER ptg-user
+# USER ptg-user
 
 # Entrypoint time (aka runtime)
 ENTRYPOINT ["/bin/bash","/opt/manager/entrypoint.sh"]
