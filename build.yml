@@ -1,4 +1,3 @@
----
 - name: Building Image
   hosts: localhost
   connection: local
@@ -22,7 +21,3 @@
     - name: Build And Install
       include_tasks:
         file: jobs/build/build.yml
-    - name: Install run-become_user
-      include_tasks:
-        file: jobs/build/user.yml
-

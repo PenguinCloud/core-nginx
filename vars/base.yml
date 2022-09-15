@@ -1,4 +1,17 @@
 ---
+
+pcre:
+  link: "{{ lookup('env', 'PCRE_LINK') }}"
+  ver: "{{ lookup('env', 'PCRE_VERSION') }}"
+
+zlib:
+  link: "{{ lookup('env', 'ZLIB_LINK') }}"
+  ver: "{{ lookup('env', 'ZLIB_VERSION') }}"
+
+openssl:
+  link: "{{ lookup('env', 'OPENSSL_LINK') }}"
+  ver: "{{ lookup('env', 'OPENSSL_VERSION') }}"
+
 rtmp_link: "{{ lookup('env', 'RTMP_LINK') }}"
 modsec_link: "{{ lookup('env', 'MODSEC_LINK') }}"
 sec_headers_link: "{{ lookup('env', 'SEC_HEADERS_LINK') }}"

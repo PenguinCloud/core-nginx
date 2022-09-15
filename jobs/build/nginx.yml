@@ -2,7 +2,7 @@
 - name: Unpack NGINX
   ansible.builtin.unarchive:
     src: "{{ nginx.url }}"
-    dest: /opt/
+    dest: /opt
     remote_src: yes
 
 - name: Change name to NGINX
@@ -12,7 +12,7 @@
 
 - name: Configure NGINX for compiling
   shell:
-    chdir: /opt/nginx/
+    chdir: /opt/nginx
     cmd: |
         ./configure --add-module=/usr/src/ModRTMP \
         --with-http_ssl_module --with-stream  --with-http_geoip_module \
@@ -25,6 +25,7 @@
         --modules-path=/etc/nginx/modules --with-http_v2_module --with-stream=dynamic \
         --with-http_addition_module --with-http_mp4_module
 
+
 - name: Compile NGINX
   shell:
     chdir: /opt/nginx
@@ -33,7 +34,3 @@
       make install -j 8
   register: compileout
 
-- name: Create nginx user
-  ansible.builtin.user:
-    name: www-data
-    group: www-data
