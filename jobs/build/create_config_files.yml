@@ -1,0 +1,28 @@
+---
+- name: Grant permission to nginx config file
+  file:
+    path: /etc/odoo
+    mode: '0744'
+    owner: ptg-user
+
+- name: Create sites enabled config folder
+  file:
+    path: /etc/nginx/sites-available
+    state: directory
+    mode: '0744'
+    owner: ptg-user
+
+- name: Create streams enabled config file
+  file:
+    path: /etc/nginx/streams
+    state: directory
+    mode: '0744'
+    owner: ptg-user
+
+- name: Create upstreams file
+  file:
+    path: /etc/nginx/upstreams
+    state: directory
+    mode: '0744'
+    owner: ptg-user
+

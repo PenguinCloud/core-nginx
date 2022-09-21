@@ -1,0 +1,5 @@
+---
+- name: Configure nginx as a revrse proxy
+  template:
+    src: templates/reverse_proxy.j2
+    dest: /etc/nginx/sites-available/reverse_proxy

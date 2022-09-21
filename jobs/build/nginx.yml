@@ -8,13 +8,13 @@
 - name: Change name to NGINX
   shell:
     chdir: /opt/
-    cmd: rm -rf nginx && mv nginx-"{{ nginx.version }}"/ nginx/
+    cmd: mv nginx-"{{ nginx.version }}"/ nginx/
 
 - name: Configure NGINX for compiling
   shell:
     chdir: /opt/nginx
     cmd: |
-        ./configure --add-module=/usr/src/ModRTMP \
+        ./configure --add-module=/usr/src/rtmp \
         --with-http_ssl_module --with-stream  --with-http_geoip_module \
         --with-http_v2_module --with-threads --with-http_gunzip_module --with-compat \
         --user=www-data --group=www-data --prefix=/var/www/html \
@@ -25,12 +25,14 @@
         --modules-path=/etc/nginx/modules --with-http_v2_module --with-stream=dynamic \
         --with-http_addition_module --with-http_mp4_module
 
-
 - name: Compile NGINX
   shell:
     chdir: /opt/nginx
     cmd: |
       make
-      make install -j 8
-  register: compileout
+
+- name: Install nginx
+  shell:
+    chdir: /opt/nginx
+    cmd: make install
 

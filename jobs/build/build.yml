@@ -15,11 +15,11 @@
   include_tasks:
     file: nginx.yml
 
-#- name: Install Certbot
-#  include_tasks:
-#    file: install_certbot.yml
-#  when: http_ssl.enable == "self signed"
-#
+- name: Install Certbot
+  include_tasks:
+    file: install_certbot.yml
+  when: http_ssl.enable == "self signed"
+
 #- name: Install php-fpm
 #  include_tasks:
 #    file: php-fpm.yml

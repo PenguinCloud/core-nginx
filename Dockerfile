@@ -25,34 +25,37 @@ ARG APP_TITLE="NGINX"
 # BUILD IT!
 RUN ansible-playbook build.yml -c local
 
-#ENV RTMP_EBABLE="no"
-#ENV RTMP_HLS="on"
-#ENV RTMP_RECORD="on"
-#ENV RTMP_PORT="1935"
-#ENV RTMP_USER="user"
-#ENV RTMP_PASS="123456"
-#ENV RTMP_DEST_URL="rtmp.penguintech.group"
+ENV WORKER_CONNECTIONS="1024"
+# ENV RTMP_EBABLE="no" Not needed
+# ENV RTMP_HLS="on"
+# ENV RTMP_RECORD="on" Not needed
+# ENV RTMP_PORT="1935"
+# ENV RTMP_USER="user" Not needed
+# ENV RTMP_PASS="123456" Not nedded
+# ENV RTMP_DEST_URL="rtmp.penguintech.group"
 ## Recommend alphanumeric
-#ENV RTMP_DEST_KEY="notAkey"
-#ENV STREAM_ENABLE="no"
-#ENV STREAM_PORT="2525"
-#ENV STREAM_PROTO="tcp"
-#ENV STREAM_BUFFER="16k"
-#ENV HTTP_ENABLE="yes"
+#ENV RTMP_DEST_KEY="notAkey" Not Needed
+#ENV STREAM_ENABLE="no" Not Nneeded
+#ENV STREAM_PORT="2525" Not needed
+#ENV STREAM_PROTO="tcp"  Not needed
+#ENV STREAM_BUFFER="16k" Not needed
+#ENV HTTP_ENABLE="yes" Not needed
+ENV HTTP_SERVER_NAME="Nginx"
 #ENV HTTP_PORT="80"
-#ENV HTTP_ROOT="/var/www/public_html"
+#ENV HTTP_ROOT="/var/www/public_html" Not needed # Not needed
 #ENV HTTPS_ENABLE="self signed"
 #ENV HTTPS_REDIRECT="yes"
-#ENV HTTPS_ROOT="/opt/nginx"
+#ENV HTTPS_ROOT="/opt/nginx" Not needed
 #ENV HTTPS_PORT="443"
-#ENV HTTPS_KEYSIZE="4096"
-#ENV HTTPS_TLD="example.penguintech.group"
-#ENV HTTPS_EMAIL="iainjenkins@webmail.co.za"
-#ENV HTTPS_METHOD="BYOC"
-#ENV HTTPS_NAME="name"
-#ENV HTTPS_COUNTRY="US"
+ENV HTTPS_KEYSIZE="4096"
+ENV HTTPS_TLD="example.penguintech.group"
+ENV HTTPS_EMAIL="iainjenkins@webmail.co.za"
+ENV HTTPS_METHOD="BYOC"
+ENV HTTPS_NAME="name"
+ENV HTTPS_COUNTRY="US"
+ENV HTTPS_KEYTYPE="RSA"
 #ENV UPSTREAM_ENABLE="no"
-#ENV STREAM_LBMETHOD="none"
+#ENV STREAM_LBMETHOD="none" # Not needed
 #ENV UPSTREAM_SSLVERIFY="yes"
 #ENV UPSTREAM_DEST1_ENABLE="yes"
 #ENV UPSTREAM_DEST1_IP="127.0.0.1"
@@ -83,14 +86,21 @@ RUN ansible-playbook build.yml -c local
 #ENV UPSTREAM_DEST5_TIMEOUT="5"
 #ENV UPSTREAM_DEST5_KEEPALIVE="30"
 
-EXPOSE 80
+EXPOSE  80 443 1935
 
 RUN ansible-playbook entrypoint.yml --tags run -c local
 
-# RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-#	&& ln -sf /dev/stderr /var/log/nginx/error.log
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
+
 # Switch to non-root user
 # USER ptg-user
 
 # Entrypoint time (aka runtime)
 ENTRYPOINT ["/bin/bash","/opt/manager/entrypoint.sh"]
+
+
+# Config notes /sites-enabled - HTTP local / proxy
+#/streams-enabled - TCP/UDP
+#/rtmp-enabled - RT
+#/upstreams - Upstreams

@@ -3,11 +3,20 @@
 #  include_tasks:
 #    file: jobs/run/lets_encrypt.yml
 #
-#- name: Run Open SSL if enabled
-#  include_tasks:
-#    file: openssl.yml
+- name: Run Open SSL if enabled
+  include_tasks:
+    file: openssl.yml
 #  when: http_ssl.enable == "open"
 #
 #- name: Create Configs
 #  include_tasks:
 #    file: jobs/run/www.yml
+
+- name: Config reverse proxy.yml
+  include_tasks:
+    file: reverseproxy.yml
+
+- name: Config nginx
+  include_tasks:
+    file: config_nginx.yml
+
