@@ -1,6 +1,0 @@
----
-- name: Template nginx config file to /etc/nginx/nginx.conf
-  template:
-    src: templates/nginx_rtmp.j2
-    dest: /etc/nginx/nginx.conf
-    force: yes

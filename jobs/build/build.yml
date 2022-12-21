@@ -1,26 +1,16 @@
 ---
-- name: Include Initialize
+- name: Install nginx
   include_tasks:
-    file: initialize.yml
+    file: install_nginx.yml
 
-- name: Get RTMP
+- name: Set permissions for php-fpm
   include_tasks:
-    file: rtmp.yml
+    file: permissions_phpfpm.yml
 
-- name: Include Security Mods
+- name: Set permissions
   include_tasks:
-    file: security-mods.yml
+    file: permissions_nginx.yml
 
-- name: Include nginx
+- name: Create open ssl certificate repo's
   include_tasks:
-    file: nginx.yml
-
-- name: Install Certbot
-  include_tasks:
-    file: install_certbot.yml
-  when: http_ssl.enable == "self signed"
-
-#- name: Install php-fpm
-#  include_tasks:
-#    file: php-fpm.yml
-#  when: fpm.enable == "yes"
+    file: create_cert_directories.yml

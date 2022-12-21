@@ -1,98 +1,23 @@
 ---
-rtmp_link: "{{ lookup('env', 'RTMP_LINK') }}"
-modsec_link: "{{ lookup('env', 'MODSEC_LINK') }}"
-sec_headers_link: "{{ lookup('env', 'SEC_HEADERS_LINK') }}"
-
-nginx:
-  url: "{{ lookup('env', 'NGINX_URL') }}" # example.com
-  version: "{{ lookup('env', 'NGINX_VERSION') }}"
-  gzip: "{{ lookup('env', 'NGINX_GZIP') }}" # on
-  domain: "{{ lookup('env', 'NGINX_DOMAIN') }}" # example.com
-  worker_connections: "{{ lookup('env', 'WORKER_CONNECTIONS') }}"
-
-fpm:
-  enable: "{{ lookup('env', 'FPM_ENABLE') }}" # no
-
-rtmp:
-  enable:  "{{ lookup('env', 'RTMP_ENABLE') }}" # no
-  hls: "{{ lookup('env', 'RTMP_HLS') }}" # on
-  record: "{{ lookup('env', 'RTMP_RECORD') }}" # on
-  port: "{{ lookup('env', 'RTMP_PORT') }}" # 1935
-  user: "{{ lookup('env', 'RTMP_USER') }}" # user
-  pass: "{{ lookup('env', 'RTMP_PASS') }}" # 123456
-  destination:
-    url: "{{ lookup('env', 'RTMP_DEST_URL') }}" # rtmp.penguintech.group
-    key: "{{ lookup('env', 'RTMP_DEST_KEY') }}" # notakey
-
-stream:
-  enable: "{{ lookup('env', 'STREAM_ENABLE') }}" # no
-  port: "{{ lookup('env', 'STREAM_PORT') }}" # 2525
-  protocol: "{{ lookup('env', 'STREAM_PROTO') }}" # tcp
-  buffer: "{{ lookup('env', 'STREAM_BUFFER') }}" # 16k
-
-http:
-  enable: "{{ lookup('env', 'HTTP_ENABLE') }}" # yes
-  port: "{{ lookup('env', 'HTTP_PORT') }}" # 80
-  root: "{{ lookup('env', 'HTTP_ROOT') }}" # /var/www/public_html
-  server_name: "{{ lookup('env', 'HTTP_SERVER_NAME') }}"
-http_ssl:
-    enable: "{{ lookup('env', 'HTTPS_ENABLE') }}" # no type self signed or open
-    redirect: "{{ lookup('env', 'HTTPS_REDIRECT') }}" # yes
-    root: "{{ lookup('env', 'HTTPS_ROOT') }}" # /var/www/public_html
-    port: "{{ lookup('env', 'HTTPS_PORT') }}" # 443
-    keysize: "{{ lookup('env', 'HTTPS_KEYSIZE') }}" # 4096
-    email: "{{ lookup('env', 'HTTPS_EMAIL') }}" # na@example.com
-    tld: "{{ lookup('env', 'HTTPS_TLD') }}" # example.penguintech.group
-    method: "{{ lookup('env', 'HTTPS_METHOD') }}"  #  [LE], BYOC, or GEN
-    name: "{{ lookup('env', 'HTTPS_NAME') }}"
-    country : "{{ lookup('env', 'HTTPS_COUNTRY') }}"
-    keytype: "{{ lookup('env', 'HTTPS_KEYTYPE') }}"
-
-upstream:
-  enable:  "{{ lookup('env', 'UPSTREAM_ENABLE') }}" # no
-  lbMethod: "{{ lookup('env', 'STREAM_LBMETHOD') }}" # none
-  verify: "{{ lookup('env', 'UPSTREAM_SSLVERIFY') }}" # yes
-  destination1:
-    enable: "{{ lookup('env', 'UPSTREAM_DEST1_ENABLE') }}" # yes
-    ip: "{{ lookup('env', 'UPSTREAM_DEST1_IP') }}" # 127.0.0.1
-    port: "{{ lookup('env', 'UPSTREAM_DEST1_PORT') }}" # 2525
-    fails: "'{{ lookup('env', 'UPSTREAM_DEST1_FAILS') }}" # 5
-    timeout: "{{ lookup('env', 'UPSTREAM_DEST1_TIMEOUT') }}" # 5
-    keepalive: "{{ lookup('env', 'UPSTREAM_DEST1_KEEPALIVE') }}" # 30
-  destination2:
-    enable: "{{ lookup('env', 'UPSTREAM_DEST2_ENABLE') }}" # no
-    ip: "{{ lookup('env', 'UPSTREAM_DEST2_IP') }}" # 127.0.0.1
-    port: "{{ lookup('env', 'UPSTREAM_DEST2_PORT') }}" # 2525
-    fails: "{{ lookup('env', 'UPSTREAM_DEST2_FAILS') }}" # 5
-    timeout: "{{ lookup('env', 'UPSTREAM_DEST2_TIMEOUT') }}" # 5
-    keepalive: "{{ lookup('env', 'UPSTREAM_DEST2_KEEPALIVE') }}" # 30
-  destination3:
-    enable: "{{ lookup('env', 'UPSTREAM_DEST3_ENABLE') }}" # no
-    ip: "{{ lookup('env', 'UPSTREAM_DEST3_IP') }}" # 127.0.0.1
-    port: "{{ lookup('env', 'UPSTREAM_DEST3_PORT') }}" # 2525
-    fails: "{{ lookup('env', 'UPSTREAM_DEST3_FAILS') }}" # 5
-    timeout: "{{ lookup('env', 'UPSTREAM_DEST3_TIMEOUT') }}" # 5
-    keepalive: "{{ lookup('env', 'UPSTREAM_DEST3_KEEPALIVE') }}" # 30
-  destination4:
-    enable: "{{ lookup('env', 'UPSTREAM_DEST4_ENABLE') }}" # no
-    ip: "{{ lookup('env', 'UPSTREAM_DEST4_IP') }}" # 127.0.0.1
-    port: "{{ lookup('env', 'UPSTREAM_DEST4_PORT') }}" # 2525
-    fails: "{{ lookup('env', 'UPSTREAM_DEST4_FAILS') }}" # 5
-    timeout: "{{ lookup('env', 'UPSTREAM_DEST4_TIMEOUT') }}" # 5
-    keepalive: "{{ lookup('env', 'UPSTREAM_DEST4_KEEPALIVE') }}" # 30
-  destination5:
-    enable: "{{ lookup('env', 'UPSTREAM_DEST5_ENABLE') }}" # no
-    ip: "{{ lookup('env', 'UPSTREAM_DEST5_IP') }}" # 127.0.0.1
-    port: "{{ lookup('env', 'UPSTREAM_DEST5_PORT') }}" # 2525
-    fails: "{{ lookup('env', 'UPSTREAM_DEST5_FAILS') }}" # 5
-    timeout: "{{ lookup('env', 'UPSTREAM_DEST5_TIMEOUT') }}" # 5
-    keepalive: "{{ lookup('env', 'UPSTREAM_DEST5_KEEPALIVE') }}" # 30
-
-ports:
-  - 80
-  - 443
-
 run:
   user: ptg-user
+
 app:
   title: "{{ lookup('ansible.builtin.env', 'APP_TILE') }}"
+  link: "{{ lookup('ansible.builtin.env', 'APP_LINK') }}"
+
+run_phpfpm: "{{ lookup('ansible.builtin.env', 'RUN_PHPFPM') }}"
+
+config_webserver: "{{ lookup('ansible.builtin.env', 'CONFIG_WEBSERVER') }}"
+
+ports:
+  http: "{{ lookup('ansible.builtin.env', 'HTTP_PORT') }}"
+  https: "{{ lookup('ansible.builtin.env', 'HTTPS_PORT') }}"
+
+server_address: "{{ lookup('ansible.builtin.env', 'SERVER_ADDRESS') }}"
+
+project:
+  directory: "{{ lookup('ansible.builtin.env', 'PROJECT_DIRECTORY') }}"
+  name: "{{ lookup('ansible.builtin.env', 'PROJECT_NAME') }}"
+
+protocol: "{{ lookup('ansible.builtin.env', 'PROTOCOL') }}"

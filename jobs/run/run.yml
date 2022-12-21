@@ -1,22 +1,13 @@
 ---
-#- name: Run Let's encrypt
-#  include_tasks:
-#    file: jobs/run/lets_encrypt.yml
-#
-- name: Run Open SSL if enabled
+- name: Configure PHP-FPM
   include_tasks:
-    file: openssl.yml
-#  when: http_ssl.enable == "open"
-#
-#- name: Create Configs
-#  include_tasks:
-#    file: jobs/run/www.yml
+    file: configure_phpfpm.yml
 
-- name: Config reverse proxy.yml
+- name: Configure Nginx
   include_tasks:
-    file: reverseproxy.yml
+    file: configure_phpfpm.yml
 
-- name: Config nginx
+- name: Configure Nginx as a webserver
   include_tasks:
-    file: config_nginx.yml
-
+    file: webserver_config.yml
+  when: config_webserver == "yes"

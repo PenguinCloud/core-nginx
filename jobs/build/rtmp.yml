@@ -1,6 +1,0 @@
----
-- name: Get rtmp module
-  git:
-    dest: /usr/src/rtmp
-    repo: "{{ rtmp_link }}"
-    accept_hostkey: yes

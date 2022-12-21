@@ -5,9 +5,8 @@ services:
     image: penguintech/nginx
     build: .
     ports:
-      - "80:80"
-      - "443:443"
-      - "1935:1935"
+      - "8080:8080"
+      - "8443:8443"
     networks:
       - nginx
     healthcheck:
