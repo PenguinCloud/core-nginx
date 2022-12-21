@@ -1,6 +1,11 @@
 ---
 - name: Configure PHP-FPM
   include_tasks:
+    file: openssl_generate.yml
+  when: protocol == "https"
+
+- name: Configure PHP-FPM
+  include_tasks:
     file: configure_phpfpm.yml
 
 - name: Configure Nginx

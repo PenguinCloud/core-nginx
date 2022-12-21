@@ -1,12 +1,12 @@
 ---
 - name: Configure nginx http webserver
   template:
-    src: /opt/manager/templates/wpsite_http.j2
+    src: /opt/manager/templates/web_http.j2
     dest: /etc/nginx/conf.d/wpsite_http.conf
   when: protocol == "http"
 
 - name: Configure nginx https webserver
   template:
-    src: /opt/manager/templates/wpsite_https.j2
+    src: /opt/manager/templates/web_https.j2
     dest: /etc/nginx/conf.d/wpsite_https.conf
   when: protocol == "https"
