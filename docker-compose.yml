@@ -1,7 +1,7 @@
 ---
 version: "2.4"
 services:
-  app:
+  nginx:
     image: penguintech/nginx
     build: .
     ports:

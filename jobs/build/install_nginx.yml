@@ -1,4 +1,9 @@
 ---
+- name: Add php repo
+  apt_repository:
+    repo: ppa:ondrej/php
+    state: present
+
 - name: Install nginx and php-fpm
   apt:
     pkg:
