@@ -3,8 +3,8 @@
   include_tasks:
     file: nginx_test.yml
 
-#- name: Ports test
-#  include_tasks:
-#    file: ports_test.yml
+- name: Ports test
+  include_tasks:
+    file: ports_test.yml
 
 
