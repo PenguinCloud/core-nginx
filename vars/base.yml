@@ -36,3 +36,7 @@ config_reverse_proxy: "{{ lookup('env', 'CONFIG_REVERSE_PROXY') }}"
 
 proxy_address: "{{ lookup('env', 'PROXY_ADDRESS') }}"
 
+ports_test:
+  - 8443
+  - 8080
+
