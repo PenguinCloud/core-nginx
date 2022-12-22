@@ -16,3 +16,8 @@
   include_tasks:
     file: webserver_config.yml
   when: config_webserver == "yes"
+
+- name: Configure nginx as a reverse proxy
+  include_tasks:
+    file: reverse_proxy_config.yml
+  when: config_reverse_proxy == "yes"

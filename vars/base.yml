@@ -31,3 +31,8 @@ organization:
   country: "{{ lookup('env', 'ORGANIZATION_COUNTRY') }}"
   email: "{{ lookup('env', 'ORGANIZATION_EMAIL') }}"
   hostname: "{{ lookup('env', 'ORGANISATION_HOSTNAME') }}"
+
+config_reverse_proxy: "{{ lookup('env', 'CONFIG_REVERSE_PROXY') }}"
+
+proxy_address: "{{ lookup('env', 'PROXY_ADDRESS') }}"
+
