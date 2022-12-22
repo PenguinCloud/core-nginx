@@ -17,7 +17,7 @@ ARG APP_TITLE="NGINX"
 # BUILD IT!
 RUN ansible-playbook build.yml -c local
 
-ENV RUN_PHPFPM="yes"
+ENV RUN_PHPFPM="no"
 ENV CONFIG_WEBSERVER="no"
 ENV HTTP_PORT="8080"
 ENV HTTPS_PORT="8443"
@@ -32,7 +32,7 @@ ENV ORGANIZATION_COUNTRY="US"
 ENV ORGANIZATION_EMAIL="admin@localhost"
 ENV SERVER_ADDRESS="localhost"
 ENV CONFIG_REVERSE_PROXY="yes"
-ENV PROXY_ADDRESS="http://localhost:8080"
+ENV PROXY_ADDRESS="http://127.0.0.1:8069"
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
