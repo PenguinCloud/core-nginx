@@ -1,38 +1,26 @@
 ---
 run:
   user: ptg-user
-
 app:
   title: "{{ lookup('ansible.builtin.env', 'APP_TILE') }}"
   link: "{{ lookup('ansible.builtin.env', 'APP_LINK') }}"
-
 run_phpfpm: "{{ lookup('ansible.builtin.env', 'RUN_PHPFPM') }}"
-
 config_webserver: "{{ lookup('ansible.builtin.env', 'CONFIG_WEBSERVER') }}"
-
 ports:
   http: "{{ lookup('ansible.builtin.env', 'HTTP_PORT') }}"
   https: "{{ lookup('ansible.builtin.env', 'HTTPS_PORT') }}"
-
 server_address: "{{ lookup('ansible.builtin.env', 'SERVER_ADDRESS') }}"
-
 project:
   directory: "{{ lookup('ansible.builtin.env', 'PROJECT_DIRECTORY') }}"
   name: "{{ lookup('ansible.builtin.env', 'PROJECT_NAME') }}"
-
 protocol: "{{ lookup('ansible.builtin.env', 'PROTOCOL') }}"
-
 cpu_count: "{{ lookup('env', 'CPU_COUNT') }}"
-
 file_limit: "{{ lookup('env', 'FILE_LIMIT') }}"
-
 organization:
   name: "{{ lookup('env', 'ORGANIZATION_NAME') }}"
   country: "{{ lookup('env', 'ORGANIZATION_COUNTRY') }}"
   email: "{{ lookup('env', 'ORGANIZATION_EMAIL') }}"
   hostname: "{{ lookup('env', 'ORGANISATION_HOSTNAME') }}"
-
 config_reverse_proxy: "{{ lookup('env', 'CONFIG_REVERSE_PROXY') }}"
-
 proxy_address: "{{ lookup('env', 'PROXY_ADDRESS') }}"
 
