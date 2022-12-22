@@ -39,3 +39,4 @@ proxy_address: "{{ lookup('env', 'PROXY_ADDRESS') }}"
 ports:
   - 8443
   - 8080
+
