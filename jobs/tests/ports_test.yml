@@ -1,0 +1,7 @@
+---
+- name: Check if ports are listening
+  wait_for:
+    port: "{{ item }}"
+    delay: 5
+    timeout: 10
+  with_items: "{{ ports_test }}"

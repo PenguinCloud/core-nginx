@@ -1,0 +1,24 @@
+---
+- name: Add php repo
+  apt_repository:
+    repo: ppa:ondrej/php
+    state: present
+
+- name: Install nginx and php-fpm
+  apt:
+    pkg:
+    - nginx
+    - php8.1
+    - php8.1-cli
+    - php8.1-fpm
+    - php8.1-phpdbg
+    - php8.1-mysql
+    - php8.1-zip
+    - php8.1-gd
+    - php8.1-mbstring
+    - php8.1-curl
+    - php8.1-xml
+    - php8.1-bcmath
+    - python-openssl
+    state: latest
+    update_cache: yes

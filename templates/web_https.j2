@@ -1,0 +1,31 @@
+server {
+    listen {{ ports.http }} default_server;
+    listen [::]:{{ ports.http }} default_server;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen {{ ports.https }} ssl http2;
+    listen [::]:{{ ports.https }} ssl http2;
+    server_name {{ server_address }};
+    ssl_certificate {{ ssl_cert }};
+    ssl_certificate_key {{ ssl_key }};
+
+    root {{ project.directory }};
+
+    index index.php index.html index.htm;
+
+    error_log /var/log/nginx/{{ project.name }}.error;
+    access_log /var/log/nginx/{{ project.name }}.access;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+    }
+}

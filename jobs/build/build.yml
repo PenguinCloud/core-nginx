@@ -1,0 +1,16 @@
+---
+- name: Install nginx
+  include_tasks:
+    file: install_nginx.yml
+
+- name: Set permissions for php-fpm
+  include_tasks:
+    file: permissions_phpfpm.yml
+
+- name: Set permissions
+  include_tasks:
+    file: permissions_nginx.yml
+
+- name: Create open ssl certificate repo's
+  include_tasks:
+    file: create_cert_directories.yml

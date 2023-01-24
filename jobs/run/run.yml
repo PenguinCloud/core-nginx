@@ -1,0 +1,23 @@
+---
+- name: Configure PHP-FPM
+  include_tasks:
+    file: openssl_generate.yml
+  when: protocol == "https"
+
+- name: Configure PHP-FPM
+  include_tasks:
+    file: configure_phpfpm.yml
+
+- name: Configure Nginx
+  include_tasks:
+    file: configure_phpfpm.yml
+
+- name: Configure Nginx as a webserver
+  include_tasks:
+    file: webserver_config.yml
+  when: config_webserver == "yes"
+
+- name: Configure nginx as a reverse proxy
+  include_tasks:
+    file: reverse_proxy_config.yml
+  when: config_reverse_proxy == "yes"
