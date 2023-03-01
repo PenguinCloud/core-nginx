@@ -1,6 +1,6 @@
 # PenguinTech
 variables:
-  RELEASE_VERSION: v0.1.0
+  RELEASE_VERSION: v4.1.1
 
 include:
   - template: Code-Quality.gitlab-ci.yml
@@ -186,3 +186,4 @@ runner-postrun:
     - docker image prune -f
     - docker container prune -f
     - rm -rf /tmp/$CI_COMMIT_SHA/reports
+
