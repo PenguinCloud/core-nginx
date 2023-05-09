@@ -1,0 +1,24 @@
+server {
+    listen {{ ports.http }};
+    listen [::]:{{ ports.http }};
+
+    server_name {{ server_address }};
+
+    root {{ project.directory }};
+
+    index index.php index.html index.htm;
+
+    error_log /var/log/nginx/{{ project.name }}.error;
+    access_log /var/log/nginx/{{ project.name }}.access;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ \.php$ {
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+    }
+}

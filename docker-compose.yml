@@ -1,5 +1,20 @@
 ---
 version: "2.4"
 services:
-  app:
-    image: penguintech/core-ansible
+  nginx:
+    image: penguintech/nginx
+    build: .
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    networks:
+      - nginx
+    healthcheck:
+      test: ["CMD", "ansible-playbook", "entrypoint.yml", "--tag", "test"]
+      interval: 5m
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+
+networks:
+  nginx:

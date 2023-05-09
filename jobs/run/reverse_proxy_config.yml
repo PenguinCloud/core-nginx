@@ -1,0 +1,12 @@
+---
+- name: Template reverse proxy http file to nginx
+  template:
+    src: /opt/manager/templates/reverse_proxy_http.j2
+    dest: /etc/nginx/conf.d/reverse_proxy_https.conf
+  when: protocol == "http"
+
+- name: Template reverse proxy https file to nginx
+  template:
+    src: /opt/manager/templates/reverse_proxy_https.j2
+    dest: /etc/nginx/conf.d/reverse_proxy_https.conf
+  when: protocol == "https"
